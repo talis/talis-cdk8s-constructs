@@ -87,8 +87,16 @@ done
 
 if [[ "$DO_INIT" == "true" ]]; then
   echo >&2 "Initiating replica set $RS_NAME..."
-  _mongo "$INITIATOR" <<<"$(printf 'rs.initiate({ _id: "%s", members: [%s] })' "$RS_NAME" "$MEMBERS_JS")" |
-    tee /dev/stderr | grep -q -E 'ok|already initialized'
+  timeout=60
+  until _mongo "$INITIATOR" <<<"$(printf 'rs.initiate({ _id: "%s", members: [%s] })' "$RS_NAME" "$MEMBERS_JS")" |
+    tee /dev/stderr | grep -q -E '"ok" : 1|already initialized'; do
+    sleep 1
+    ((timeout = timeout - 1))
+    [[ "$timeout" -eq 0 ]] && {
+      echo >&2 "Could not initiate $RS_NAME"
+      exit 1
+    }
+  done
 fi
 
 echo >&2 'Waiting for primary...'
