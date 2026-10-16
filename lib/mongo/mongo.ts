@@ -220,16 +220,17 @@ export class Mongo extends Construct implements DnsAwareStatefulSet {
   }
 
   private getWaitForReplicaSetCommand(): string {
-    // If replica set not enable, return success exit code immediately
+    // If replica set not enabled, return success exit code immediately
     if (!this.replicaSetName) {
       return "exit 0";
     }
 
     // script to run on the database
     const js = `while (true) {
+      const members = rs.status().members || [];
       if (
-        rs.status().members.some(({ state }) => state === 1) &&
-        rs.status().members.every(({ state }) => state === 1 || state === 2)
+        members.some(({ state }) => state === 1) &&
+        members.every(({ state }) => state === 1 || state === 2)
       ) {
         break;
       }

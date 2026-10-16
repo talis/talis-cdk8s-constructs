@@ -364,11 +364,14 @@ describe("Mongo", () => {
       });
       const container = mongo.getWaitForReplicaSetContainer();
       expect(container).toHaveProperty("name", "wait-for-mongo2-rs");
-      expect(container).toHaveProperty("command", [
-        "/bin/bash",
-        "-c",
-        "mongo --quiet --host mongo2-sts-0.mongo2 <<<'while (true) { if ( rs.status().members.some(({ state }) => state === 1) && rs.status().members.every(({ state }) => state === 1 || state === 2) ) { break; } sleep(1000); }'",
-      ]);
+      expect(container).toHaveProperty("command");
+      expect(container.command).toMatchInlineSnapshot(`
+        [
+          "/bin/bash",
+          "-c",
+          "mongo --quiet --host mongo2-sts-0.mongo2 <<<'while (true) { const members = rs.status().members || []; if ( members.some(({ state }) => state === 1) && members.every(({ state }) => state === 1 || state === 2) ) { break; } sleep(1000); }'",
+        ]
+      `);
     });
   });
 });
