@@ -65,6 +65,7 @@ exports[`Memcached example > Snapshot 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "app": "example-memcached-app",
         "instance": "memcached-example",

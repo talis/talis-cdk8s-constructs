@@ -25,6 +25,7 @@ exports[`Memcached > Props > All the props 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "app": "my-app",
         "instance": "test",
@@ -134,6 +135,7 @@ exports[`Memcached > Props > Minimal required props 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "instance": "memcached-test",
         "role": "memcached",

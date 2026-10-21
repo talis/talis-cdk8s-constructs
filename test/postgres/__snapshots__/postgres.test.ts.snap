@@ -25,6 +25,7 @@ exports[`Postgres > Props > All the props 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "app": "my-app",
         "instance": "test",
@@ -198,6 +199,7 @@ exports[`Postgres > Props > Minimal required props 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "instance": "postgres-test",
         "role": "postgres",

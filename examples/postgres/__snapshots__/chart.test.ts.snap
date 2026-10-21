@@ -88,6 +88,7 @@ exports[`Postgres example > Snapshot 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "app": "example-postgres-app",
         "instance": "postgres-example",
