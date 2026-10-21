@@ -65,6 +65,7 @@ exports[`Mongo example > Snapshot 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "app": "example-mongo-app",
         "instance": "mongo-example",

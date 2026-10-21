@@ -369,7 +369,7 @@ describe("Mongo", () => {
         [
           "/bin/bash",
           "-c",
-          "mongo --quiet --host mongo2-sts-0.mongo2 <<<'while (true) { const members = rs.status().members || []; if ( members.some(({ state }) => state === 1) && members.every(({ state }) => state === 1 || state === 2) ) { break; } sleep(1000); }'",
+          "until mongo --quiet --host mongo2-sts-0.mongo2 <<<'while (true) { const members = rs.status().members || []; if ( members.some(({ state }) => state === 1) && members.every(({ state }) => state === 1 || state === 2) ) { break; } sleep(1000); }'; do sleep 1; done",
         ]
       `);
     });

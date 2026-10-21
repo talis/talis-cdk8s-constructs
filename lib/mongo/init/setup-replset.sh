@@ -72,6 +72,19 @@ _mongo() {
   "$MONGO_CLI" --quiet "${MONGO_OPTS[@]}" --host "$@"
 }
 
+# Run a script against a host, retrying on connection errors (e.g. transient DNS failures).
+# The script is passed as an argument, as a consumed stdin can't be replayed on retry.
+_mongo_retry() {
+  local host="$1" script="$2" attempts=60
+  until _mongo "$host" <<<"$script"; do
+    if ((--attempts == 0)); then
+      echo >&2 "Could not run script on $host"
+      return 1
+    fi
+    sleep 1
+  done
+}
+
 for member in "${MEMBERS_ARR[@]}"; do
   echo >&2 "Waiting for $member"
   timeout=300
@@ -100,12 +113,12 @@ if [[ "$DO_INIT" == "true" ]]; then
 fi
 
 echo >&2 'Waiting for primary...'
-_mongo "$INITIATOR" <<<'while (true) { if (rs.status().members.some(({ state }) => state === 1)) { break; } sleep(1000); }'
+_mongo_retry "$INITIATOR" 'while (true) { if (rs.status().members.some(({ state }) => state === 1)) { break; } sleep(1000); }'
 
 echo >&2 'Waiting for secondaries...'
-_mongo "$INITIATOR" <<<'while (true) { if (rs.status().members.every(({state}) => state === 1 || state === 2)) { break; } sleep(1000); }'
+_mongo_retry "$INITIATOR" 'while (true) { if (rs.status().members.every(({state}) => state === 1 || state === 2)) { break; } sleep(1000); }'
 
 echo >&2 'Checking status...'
-_mongo "$INITIATOR" <<<'rs.status();' | tee /dev/stderr | grep -q "$RS_NAME"
+_mongo_retry "$INITIATOR" 'rs.status();' | tee /dev/stderr | grep -q "$RS_NAME"
 
 echo >&2 "Replica set $RS_NAME configured!"
