@@ -1,9 +1,0 @@
-dist
-e2e
-examples
-imports/**/*.ts
-!imports/**/*.d.ts
-lib/**/*.ts
-!lib/**/*.d.ts
-test
-test-results

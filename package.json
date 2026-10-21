@@ -33,7 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.3",
     "@commitlint/config-conventional": "^21.2.3",
-    "@types/node": "^26.6.5",
+    "@types/node": "^24.19.2",
     "@vitest/coverage-v8": "^5.0.5",
     "bats": "^1.13.0",
     "cdk8s": "^2.70.111",

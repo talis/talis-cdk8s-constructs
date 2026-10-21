@@ -1,3 +1,7 @@
 export default {
-  "*.ts": ["oxlint --fix", "oxfmt"],
+  "*.{ts,cts,mts}": [
+    "oxlint --fix --no-error-on-unmatched-pattern",
+    "oxfmt --no-error-on-unmatched-pattern",
+  ],
+  "*.{js,mjs,cjs,json,md,yml,yaml}": "oxfmt --no-error-on-unmatched-pattern",
 };
