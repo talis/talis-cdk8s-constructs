@@ -25,6 +25,7 @@ exports[`Redis > Props > All the props 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "app": "my-app",
         "instance": "test",
@@ -157,6 +158,7 @@ exports[`Redis > Props > Minimal required props 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "instance": "redis-test",
         "role": "redis",

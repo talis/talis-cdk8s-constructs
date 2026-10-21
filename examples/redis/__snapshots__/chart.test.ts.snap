@@ -65,6 +65,7 @@ exports[`Redis example > Snapshot 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "app": "example-redis-app",
         "instance": "redis-example",

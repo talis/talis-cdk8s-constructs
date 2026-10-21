@@ -50,6 +50,8 @@ export class Memcached extends Construct implements DnsAwareStatefulSet {
       },
       spec: {
         clusterIp: "None",
+        // publish pod DNS records before readiness, so early lookups don't get NXDOMAIN cached by CoreDNS
+        publishNotReadyAddresses: true,
         ports: [
           {
             port: this.port,
