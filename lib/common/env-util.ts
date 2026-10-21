@@ -3,7 +3,7 @@ import { CanaryStage, canaryStages } from "../web-service";
 
 export function getWatermark({
   envVarName = "WATERMARK",
-  defaultValue = undefined,
+  defaultValue,
 }: { envVarName?: string; defaultValue?: string } = {}): string {
   const watermark = process.env[envVarName] || defaultValue;
   const watermarkRegex = /^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/;
