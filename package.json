@@ -12,29 +12,20 @@
   ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "engines": {
-    "npm": ">=10.8.2",
-    "node": ">=22.8.0"
-  },
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
     "import": "cdk8s import --language typescript",
-    "format:prettier": "prettier --write .",
-    "format": "npm run format:prettier",
-    "lint:eslint": "eslint .",
-    "lint:prettier": "prettier --check .",
+    "format": "oxfmt",
     "lint:ts": "tsc --noEmit",
-    "lint": "npm run lint:prettier && npm run lint:eslint && npm run lint:ts",
+    "lint": "npm run lint:oxfmt && npm run lint:oxlint && npm run lint:ts",
     "prepare": "husky && ./e2e/install-detik.sh",
     "release": "npm run build && semantic-release",
     "e2e": "bats --jobs 4 --no-parallelize-within-files --timing --print-output-on-failure e2e/",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
-  },
-  "peerDependencies": {
-    "cdk8s": "^2.5.60",
-    "constructs": "^10.1.175"
+    "coverage": "vitest run --coverage",
+    "lint:oxlint": "oxlint",
+    "lint:oxfmt": "oxfmt --check"
   },
   "dependencies": {
     "cron-parser": "^5.6.1"
@@ -42,26 +33,29 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.1",
     "@commitlint/config-conventional": "^21.2.0",
-    "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.1",
-    "@typescript-eslint/eslint-plugin": "^8.63.0",
-    "@typescript-eslint/parser": "^8.63.0",
     "@vitest/coverage-v8": "^4.1.10",
     "bats": "^1.13.0",
     "cdk8s": "^2.70.83",
     "cdk8s-cli": "^2.207.39",
     "constructs": "^10.6.0",
     "conventional-changelog-conventionalcommits": "^10.2.1",
-    "eslint": "^10.6.0",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.7.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "memfs": "^4.63.0",
-    "prettier": "^3.9.4",
+    "oxfmt": "^0.74.0",
+    "oxlint": "^1.89.0",
     "semantic-release": "^25.0.5",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.23.15",
     "typescript": "~6.0.3",
     "vitest": "^4.1.10"
+  },
+  "peerDependencies": {
+    "cdk8s": "^2.5.60",
+    "constructs": "^10.1.175"
+  },
+  "engines": {
+    "node": ">=22.8.0",
+    "npm": ">=10.8.2"
   }
 }
