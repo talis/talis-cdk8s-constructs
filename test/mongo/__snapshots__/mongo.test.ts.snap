@@ -169,6 +169,7 @@ exports[`Mongo > Props > Minimal required props 1`] = `
           "protocol": "TCP",
         },
       ],
+      "publishNotReadyAddresses": true,
       "selector": {
         "instance": "mongo-test",
         "role": "mongo",

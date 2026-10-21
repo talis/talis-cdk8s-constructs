@@ -86,6 +86,8 @@ export class Mongo extends Construct implements DnsAwareStatefulSet {
       },
       spec: {
         clusterIp: exposeService ? undefined : "None",
+        // publish pod DNS records before readiness, so early lookups don't get NXDOMAIN cached by CoreDNS
+        publishNotReadyAddresses: exposeService ? undefined : true,
         ports: [
           {
             port: this.port,
@@ -237,7 +239,8 @@ export class Mongo extends Construct implements DnsAwareStatefulSet {
       sleep(1000);
     }`.replace(/\n\s+/g, " ");
     // note we don't use --eval flag because `mongosh` will error if replica set is not yet ready
-    return `${this.getMongoShell()} --quiet --host ${this.getDnsName()} <<<'${js}'`;
+    // retry on connection errors (e.g. transient DNS failures)
+    return `until ${this.getMongoShell()} --quiet --host ${this.getDnsName()} <<<'${js}'; do sleep 1; done`;
   }
 
   private getMongoShell(): string {
