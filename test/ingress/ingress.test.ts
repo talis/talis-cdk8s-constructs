@@ -59,7 +59,9 @@ describe("Ingress", () => {
         ...requiredProps,
         hostnames: [],
       };
-      expect(() => synthIngress(props)).toThrowError();
+      expect(() => synthIngress(props)).toThrowError(
+        "At least one hostname has to be defined.",
+      );
     });
 
     test("throws error when ingress class priority has invalid value", () => {
@@ -67,13 +69,17 @@ describe("Ingress", () => {
         ...requiredProps,
         ingressClassPriority: -1001,
       };
-      expect(() => synthIngress(propsForUnderLowerLimit)).toThrowError();
+      expect(() => synthIngress(propsForUnderLowerLimit)).toThrowError(
+        "Ingress class priority has to be between -1000 and 1000",
+      );
 
       const propsForOverUpperLimit: IngressProps = {
         ...requiredProps,
         ingressClassPriority: 1001,
       };
-      expect(() => synthIngress(propsForOverUpperLimit)).toThrowError();
+      expect(() => synthIngress(propsForOverUpperLimit)).toThrowError(
+        "Ingress class priority has to be between -1000 and 1000",
+      );
     });
 
     test("throws error when weight sum is not 100", () => {
@@ -95,7 +101,9 @@ describe("Ingress", () => {
         ],
       };
 
-      expect(() => synthIngress(props)).toThrowError();
+      expect(() => synthIngress(props)).toThrowError(
+        "Total service routing weigth must be 100.",
+      );
     });
 
     test("throws error when service routing is not set", () => {
@@ -104,7 +112,9 @@ describe("Ingress", () => {
         serviceRouting: [],
       };
 
-      expect(() => synthIngress(props)).toThrowError();
+      expect(() => synthIngress(props)).toThrowError(
+        "At least one service route has to be defined.",
+      );
     });
   });
 
