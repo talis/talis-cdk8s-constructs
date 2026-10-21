@@ -24,7 +24,7 @@ cdk8s_synth() {
   local file="$1"
   local folder="$2"
   if [ -z "$SKIP_CDK8S_SYNTH" ] || [ ! -d "$folder" ]; then
-    npm exec -- cdk8s synth --check-upgrade=false --app "ts-node $file" --output "$folder"
+    npm exec -- cdk8s synth --check-upgrade=false --app "tsx $file" --output "$folder"
   fi
   DETIK_CLIENT_NAMESPACE=$(grep -m1 -E -o 'namespace: \S+' "$folder"/*.yaml | awk '{print $2}')
   export DETIK_CLIENT_NAMESPACE

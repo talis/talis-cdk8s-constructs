@@ -1,2 +1,2 @@
 language: typescript
-app: ts-node main.ts
+app: tsx main.ts

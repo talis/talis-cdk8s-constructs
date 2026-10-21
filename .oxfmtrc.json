@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "ignorePatterns": [
+    "coverage",
+    ".vscode/",
+    "package-lock.json",
+    "imports/**/*.ts",
+    "imports/**/*.d.ts",
+    "imports/**/*.js",
+    "**/nginx/*.conf",
+    "e2e/**/*.d.ts",
+    "e2e/**/*.js",
+    "e2e/**/construct-metadata.json",
+    "examples/**/*.d.ts",
+    "examples/**/*.js",
+    "lib/**/*.d.ts",
+    "lib/**/*.js",
+    "test/**/*.d.ts",
+    "test/**/*.js"
+  ]
+}
