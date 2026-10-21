@@ -164,7 +164,7 @@ describe("Mongo", () => {
     test("Throws if release version is invalid", () => {
       expect(() => {
         synthMongo({ ...requiredProps, release: "v8" });
-      }).toThrowError();
+      }).toThrowError("mongo release version must begin with a number");
     });
   });
 

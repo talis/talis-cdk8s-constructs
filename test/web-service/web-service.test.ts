@@ -769,7 +769,7 @@ describe("WebService", () => {
             ...replicas,
             podDisruptionBudget: pdbProps,
           });
-        }).toThrowError();
+        }).toThrowError(/podDisruptionBudget/i);
       },
     );
 
