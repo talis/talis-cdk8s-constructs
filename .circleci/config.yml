@@ -137,4 +137,8 @@ workflows:
           requires:
             - e2e
           steps:
+            - run:
+                name: Configure GitHub auth header
+                command: |
+                  git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
             - run: npm run release
