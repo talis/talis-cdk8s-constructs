@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  aws-cli: circleci/aws-cli@5.4.2
+  aws-cli: circleci/aws-cli@5.4.3
   node: circleci/node@7.2.1
 
 parameters:
