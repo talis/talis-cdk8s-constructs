@@ -28,24 +28,24 @@
     "lint:oxfmt": "oxfmt --check"
   },
   "dependencies": {
-    "cron-parser": "^5.10.2"
+    "cron-parser": "^5.10.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@types/node": "^24.19.2",
-    "@vitest/coverage-v8": "^5.0.5",
+    "@vitest/coverage-v8": "^5.1.0",
     "bats": "^1.13.0",
-    "cdk8s": "^2.70.113",
-    "cdk8s-cli": "^2.207.70",
+    "cdk8s": "^2.70.119",
+    "cdk8s-cli": "^2.207.78",
     "constructs": "^10.8.1",
     "conventional-changelog-conventionalcommits": "^10.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
     "memfs": "^4.80.0",
-    "oxfmt": "^0.74.0",
-    "oxlint": "^1.89.0",
-    "oxlint-tsgolint": "^7.0.2005",
+    "oxfmt": "^0.76.0",
+    "oxlint": "^1.91.0",
+    "oxlint-tsgolint": "^7.0.2006",
     "semantic-release": "^25.0.9",
     "tsx": "^4.23.15",
     "typescript": "~7.0.2",
